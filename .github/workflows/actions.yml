@@ -1,10 +1,16 @@
 name: Actions Work Flow
 
 on:
-  schedule:
-    - cron: "0/5 * * * *"
-    - cron: "0/6 * * * *"
-  pull_request:
+  push:
+      branches:
+        - master
+   #repository_dispatch:
+    #  types: [build]
+  #schedule:
+  # - cron: "0/5 * * * *"
+  #- cron: "0/6 * * * *"
+  # pull_request:
+  #    types:[opened]
 jobs:
   run-github-actions:
     runs-on: ubuntu-latest
