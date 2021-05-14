@@ -1,0 +1,27 @@
+name: Alex
+age: 38
+address: "sofia : podgumer"
+active: true
+key:
+    key: value
+    key2: 23
+    kew3:
+        key: value
+        key2: value
+jsonObject: {key: value, key2: 23}
+array:
+    - item1
+    - item2
+    - {key: value}
+jsonArray: [item1, item2]
+objectsArray:
+    - key: value
+      kew2: value
+    - key: value
+      key2: value2
+longText: >
+    hjlkdfsj
+    sdkfj ldsf 
+    lk 
+    lkfgl 
+    dsfdgvjnfdlkskbvdf       
