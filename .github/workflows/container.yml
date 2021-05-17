@@ -12,8 +12,8 @@ jobs:
       - name: Step with docker
         uses: docker://node:16-alpine3.11
         with:
-         entrypoint: 'bin/echo'
-         args: 'Hello World!'
+         entrypoint: "bin/echo"
+         args: "Hello World!"
       - name: Log node version
         uses: docker://node:16-alpine3.11
         with:
