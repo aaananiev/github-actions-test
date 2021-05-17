@@ -1,7 +1,7 @@
 name: Actions Work Flow
 
 on:
-  push:
+  pull_request:
    #   branches:
    #     - master
    #repository_dispatch:
