@@ -15,7 +15,7 @@ jobs:
           fetch-depth: 0
       - name: Make a changes
         run: |
-          echo "Test 1 ${GITHUB_ACTOR} ${date}" >> gitpropertyes.txt
+          echo "Test 1 ${GITHUB_ACTOR} ${GITHUB_REF}" >> release/gitpropertyes.txt
           cat gitpropertyes.txt
           rm -f random.txt
           ls -a
@@ -23,5 +23,7 @@ jobs:
         #uses: ad-m/github-push-action@master
         uses: actions-js/push@master
         with:
+          directory: release
+          force: true
           github_token: ${{ secrets.TOKEN }}
           branch: release   
