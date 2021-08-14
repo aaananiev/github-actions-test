@@ -1,0 +1,21 @@
+name: Game Release
+
+on:
+  push: 
+    branches:
+    - master
+
+jobs:
+  game-release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.TOKEN}}
+      - name: Make a changes
+        run: echo "${GITHUB.AUTOR}" >> gitpropertyes.txt
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.TOKEN }}
+          branch: ${{ github.ref }}   
