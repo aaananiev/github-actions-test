@@ -1,4 +1,4 @@
-name: Game Release
+name: Build Game
 
 on:
   push: 
@@ -13,17 +13,12 @@ jobs:
         with:
           token: ${{ secrets.TOKEN}}
           fetch-depth: 0
-      - name: Make a changes
-        run: |
-          echo "Test 1 ${GITHUB_ACTOR} ${GITHUB_REF}" >> release/gitpropertyes.txt
-          cat **/gitpropertyes.txt
-          rm -f random.txt
-          ls -a
-      - name: Push changes
-        #uses: ad-m/github-push-action@master
-        uses: actions-js/push@master
+      - name: NodeJS setup
+        uses: actions/setup-node@v1
         with:
-          directory: release
-          force: true
-          github_token: ${{ secrets.TOKEN }}
-          branch: release   
+          node-version: "12.x"    
+      - name: Create a Release
+        run: npx semantic-release
+        env:
+        #the token have to be added to the sectrets
+          GITHUB_TOKEN : ${secrets.TOKEN}

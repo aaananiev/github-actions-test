@@ -1,0 +1,30 @@
+name: Build Game
+
+on:
+  push: 
+    branches:
+    - master
+
+jobs:
+  game-release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.TOKEN}}
+          fetch-depth: 0
+      - name: Make a changes
+        run: |
+          echo "Test 1 ${GITHUB_ACTOR} ${GITHUB_REF}" >> release/gitpropertyes.txt
+          cat **/gitpropertyes.txt
+          rm -f random.txt
+          ls -a
+      - name: Push changes
+        #uses: ad-m/github-push-action@master
+        uses: actions-js/push@master
+        with:
+          message: release
+          directory: release
+          force: true
+          github_token: ${{ secrets.TOKEN }}
+          branch: build   
