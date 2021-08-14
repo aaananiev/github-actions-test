@@ -24,7 +24,7 @@ jobs:
         #uses: ad-m/github-push-action@master
         uses: actions-js/push@master
         with:
-          message: 'new release'
+          message: ${{ github.event.head_commit.message }}
           directory: release
           force: true
           github_token: ${{ secrets.TOKEN }}
