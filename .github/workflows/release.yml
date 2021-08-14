@@ -13,7 +13,7 @@ jobs:
         with:
           token: ${{ secrets.TOKEN}}
       - name: Make a changes
-        run: echo "${GITHUB.ACTOR}" >> gitpropertyes.txt
+        run: echo "Test 1" >> gitpropertyes.txt
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
