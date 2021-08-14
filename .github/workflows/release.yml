@@ -12,6 +12,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           token: ${{ secrets.TOKEN}}
+          fetch-depth: 0
       - name: Make a changes
         run: |
           echo "Test 1 ${GITHUB_ACTOR}" >> gitpropertyes.txt
