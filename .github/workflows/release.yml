@@ -16,7 +16,8 @@ jobs:
       - name: NodeJS setup
         uses: actions/setup-node@v1
         with:
-          node-version: "12.x"    
+          node-version: "12.x" 
+      - run: echo "${GITHUB_REF}"       
       - name: Create a Release
         run: npx semantic-release
         env:
