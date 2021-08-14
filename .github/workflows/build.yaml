@@ -23,7 +23,7 @@ jobs:
         #uses: ad-m/github-push-action@master
         uses: actions-js/push@master
         with:
-          message: release
+          message: 'fix:initial release'
           directory: release
           force: true
           github_token: ${{ secrets.TOKEN }}
