@@ -16,6 +16,7 @@ jobs:
       - name: Make a changes
         run: |
           echo "Test 1 ${GITHUB_ACTOR}" >> gitpropertyes.txt
+          rm -f random.txt
           ls -a
       - name: Push changes
         #uses: ad-m/github-push-action@master
