@@ -17,6 +17,7 @@ jobs:
         run: |
           cd release
           echo "Test 1 ${GITHUB_ACTOR} ${GITHUB_REF}" >> gitpropertyes.txt
+          echo "${{ github.event.head_commit.message }}" >> gitpropertyes.txt
           cat gitpropertyes.txt
           rm -f random.txt
           ls -a
