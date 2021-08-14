@@ -16,7 +16,7 @@ jobs:
       - name: Make a changes
         run: |
           echo "Test 1 ${GITHUB_ACTOR} ${GITHUB_REF}" >> release/gitpropertyes.txt
-          cat gitpropertyes.txt
+          cat **/gitpropertyes.txt
           rm -f random.txt
           ls -a
       - name: Push changes
