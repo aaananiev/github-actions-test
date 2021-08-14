@@ -14,11 +14,11 @@ jobs:
           token: ${{ secrets.TOKEN}}
       - name: Make a changes
         run: |
-          echo "Test 1" >> gitpropertyes.txt
+          echo "Test 1 ${GITHUB_ACTOR}" >> gitpropertyes.txt
           ls -a
       - name: Push changes
         #uses: ad-m/github-push-action@master
         uses: actions-js/push@master
         with:
           github_token: ${{ secrets.TOKEN }}
-          #branch: ${{ github.ref }}   
+          branch: ${{ github.ref }}   
