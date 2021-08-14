@@ -15,7 +15,7 @@ jobs:
           fetch-depth: 0
       - name: Make a changes
         run: |
-          echo "Test 1 ${GITHUB_ACTOR}" >> gitpropertyes.txt
+          echo "Test 1 ${GITHUB_ACTOR} ${date}" >> gitpropertyes.txt
           rm -f random.txt
           ls -a
       - name: Push changes
