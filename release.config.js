@@ -1,5 +1,5 @@
 module.exports = {
-    branches: "master",
+    branches: "build",
     repositoryURL: "https://github.com/camelotls/iwg-game-test-repo",
     plugins: [
       "@semantic-release/commit-analyzer",
