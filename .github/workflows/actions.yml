@@ -2,8 +2,8 @@ name: Actions Work Flow
 
 on:
   pull_request:
-   #   branches:
-   #     - master
+      branches:
+        - test
    #repository_dispatch:
     #  types: [build]
   #schedule:
