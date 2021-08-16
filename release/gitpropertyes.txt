@@ -1,2 +1,6 @@
 New line is added
-Test2
+Test2Test 1 aaananiev refs/heads/master
+Merge pull request #48 from aaananiev/dev
+
+Dev
+refs/heads/master
