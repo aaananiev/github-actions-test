@@ -15,6 +15,8 @@ jobs:
           fetch-depth: 0
       - name: Make a changes
         run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
           git checkout -b release
           cd release
           echo "Test 1 ${GITHUB_ACTOR} ${GITHUB_REF}" >> gitpropertyes.txt
