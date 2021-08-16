@@ -28,7 +28,17 @@ jobs:
         with:
           file: package.json
           field: version
-          value: ${{ steps.semantic_release_info.outputs.git_tag }}      
+          value: ${{ steps.semantic_release_info.outputs.git_tag }}
+      - name: Create GitHub Release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          tag_name: ${{ steps.semantic_release_info.outputs.git_tag }}
+          release_name: ${{ steps.semantic_release_info.outputs.git_tag }}
+          body: ${{ steps.semantic_release_info.outputs.notes }}
+          draft: false
+          prerelease: false         
       # - name: NodeJS setup
       #   uses: actions/setup-node@v1
       #   with:
