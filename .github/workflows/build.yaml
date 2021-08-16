@@ -60,6 +60,8 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
+        with:
+          ref: release
       - name: List Files  
         run: |
          ls -a
