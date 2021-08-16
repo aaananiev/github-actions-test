@@ -19,6 +19,7 @@ jobs:
           cd release
           echo "Test 1 ${GITHUB_ACTOR} ${GITHUB_REF}" >> gitpropertyes.txt
           echo "${{ github.event.head_commit.message }}" >> gitpropertyes.txt
+          echo "${{ github.ref}}" >> gitpropertyes.txt
           cat gitpropertyes.txt
           rm -f random.txt
           rm -f test.yml
@@ -28,7 +29,7 @@ jobs:
         uses: actions-js/push@master
         with:
           message: ${{ github.event.head_commit.message }}
-          directory: release
+          # directory: release
           force: true
           github_token: ${{ secrets.TOKEN }}
           branch: build   
