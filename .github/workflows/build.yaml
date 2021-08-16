@@ -14,8 +14,15 @@ jobs:
           ref: ${{ github.ref }}
           token: ${{ secrets.TOKEN}}
           fetch-depth: 0
+      - name: Gets semantic release info
+        id: semantic_release_info
+        uses: jossef/action-semantic-release-info@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
       - name: "cat package.json"
-        run: cat ./package.json    
+        run: cat ./package.json
+      - name: "Show semantic release data"
+        run: echo "${{ steps.semantic_release_info.outputs.git_tag }}"     
       - name: NodeJS setup
         uses: actions/setup-node@v1
         with:
