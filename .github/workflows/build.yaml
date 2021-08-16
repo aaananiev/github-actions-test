@@ -19,14 +19,20 @@ jobs:
         uses: jossef/action-semantic-release-info@v1
         env:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
+      - name: "Show semantic release data"
+        run: echo "${{ steps.semantic_release_info.outputs.git_tag }}"      
       - name: "cat package.json"
         run: cat ./package.json
-      - name: "Show semantic release data"
-        run: echo "${{ steps.semantic_release_info.outputs.git_tag }}"     
-      - name: NodeJS setup
-        uses: actions/setup-node@v1
+      - name: Update package.json version
+        uses: jossef/action-set-json-field@v1
         with:
-          node-version: "12.x"
+          file: package.json
+          field: version
+          value: ${{ steps.semantic_release_info.outputs.git_tag }}      
+      # - name: NodeJS setup
+      #   uses: actions/setup-node@v1
+      #   with:
+      #     node-version: "12.x"
       # - name: "Automated Version Bump"
       #   uses: "phips28/gh-action-bump-version@master"
       #   with:
