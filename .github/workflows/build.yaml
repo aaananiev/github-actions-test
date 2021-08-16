@@ -11,8 +11,23 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
+          ref: ${{ github.ref }}
           token: ${{ secrets.TOKEN}}
           fetch-depth: 0
+      - name: "cat package.json"
+        run: cat ./package.json    
+      - name: NodeJS setup
+        uses: actions/setup-node@v1
+        with:
+          node-version: "12.x"
+      - name: "Automated Version Bump"
+        uses: "phips28/gh-action-bump-version@master"
+        with:
+          tag-prefix: ''
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
+      - name: "cat package.json"
+        run: cat ./package.json         
       - name: Make a changes
         run: |
           git config --local user.email "action@github.com"
