@@ -15,15 +15,9 @@ jobs:
           fetch-depth: 0
       - name: Make a changes
         run: |
-<<<<<<< .mine
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           #git checkout -b release
-=======
-          #git config --local user.email "action@github.com"
-          #git config --local user.name "GitHub Action"
-          #git checkout -b release
->>>>>>> .theirs
           cd release
           echo "Test 1 ${GITHUB_ACTOR} ${GITHUB_REF}" >> gitpropertyes.txt
           echo "${{ github.event.head_commit.message }}" >> gitpropertyes.txt
@@ -32,11 +26,8 @@ jobs:
           rm -f random.txt
           rm -f test.yml
           ls -a
-<<<<<<< .mine
           git commit -m "Add changes" -a
-=======
 
->>>>>>> .theirs
       - name: Push changes
         #uses: ad-m/github-push-action@master
         uses: actions-js/push@master
