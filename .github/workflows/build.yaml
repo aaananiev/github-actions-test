@@ -41,7 +41,7 @@ jobs:
           rm -f random.txt
           rm -f test.yml
           ls -a
-          git add.
+          git add .
           git status
           #git commit -m "Add changes" -a
 
