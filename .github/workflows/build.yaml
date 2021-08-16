@@ -32,4 +32,4 @@ jobs:
           # directory: release
           force: true
           github_token: ${{ secrets.TOKEN }}
-          branch: build   
+          branch: release   
