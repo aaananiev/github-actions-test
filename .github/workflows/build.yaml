@@ -41,17 +41,21 @@ jobs:
     runs-on: ubuntu-latest
     needs: ["build-release"]
     steps:
-      - uses: actions/checkout@v2
-        with:
-          token: ${{ secrets.TOKEN}}
-          fetch-depth: 0
-      - name: NodeJS setup
-        uses: actions/setup-node@v1
-        with:
-          node-version: "12.x" 
-      - run: echo "${GITHUB_REF}"       
-      - name: Create a Release
-        run: npx semantic-release
-        env:
-        #the token have to be added to the sectrets
-          GITHUB_TOKEN : ${secrets.TOKEN}
+      - name: Checkout repo
+        uses: actions/checkout@v2
+      - name: List Files  
+        run: |
+         ls -a
+      #  # with:
+      #  #   token: ${{ secrets.TOKEN}}
+      #  #   fetch-depth: 0
+      # - name: NodeJS setup
+      #   uses: actions/setup-node@v1
+      #   with:
+      #     node-version: "12.x" 
+      # - run: echo "${GITHUB_REF}"       
+      # - name: Create a Release
+      #   run: npx semantic-release
+      #   env:
+      #   #the token have to be added to the sectrets
+      #     GITHUB_TOKEN : ${secrets.TOKEN}
