@@ -26,7 +26,7 @@ jobs:
           rm -f random.txt
           rm -f test.yml
           ls -a
-          git commit -m "Add changes" -a
+          #git commit -m "Add changes" -a
 
       - name: Push changes
         #uses: ad-m/github-push-action@master
