@@ -20,7 +20,14 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
       - name: "Show semantic release data"
-        run: echo "${{ steps.semantic_release_info.outputs.git_tag }}"      
+        run: |
+          echo "Tag: ${{ steps.semantic_release_info.outputs.git_tag }}"
+          echo "Channel: ${{ steps.semantic_release_info.outputs.channel }}"
+          echo "Type: ${{ steps.semantic_release_info.outputs.type }}"
+          echo "Head: ${{ steps.semantic_release_info.outputs.git_head }}"
+          echo "Version: ${{ steps.semantic_release_info.outputs.version }}"
+          echo "Name: ${{ steps.semantic_release_info.outputs.name }}"
+          echo "Notes: ${{ steps.semantic_release_info.outputs.notes }}"                  
       - name: "cat package.json"
         run: cat ./package.json
       - name: Update package.json version
