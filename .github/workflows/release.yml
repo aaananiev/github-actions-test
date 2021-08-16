@@ -3,7 +3,7 @@ name: Build Game
 on:
   push: 
     branches:
-    - master
+    - test
 
 jobs:
   game-release:
