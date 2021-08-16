@@ -8,7 +8,7 @@ on:
 jobs:
   game-release:
     runs-on: ubuntu-latest
-    needs: ["game-release"]
+    needs: ["build-release"]
     steps:
       - uses: actions/checkout@v2
         with:
