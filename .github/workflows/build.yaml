@@ -40,6 +40,48 @@ jobs:
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
+      - name: "cat package.json"
+        run: cat ./package.json
+      - name: "create zip archive"
+        run: zip -r "${{ steps.semantic_release_info.outputs.git_tag }}" release/
+        # For deploy build as maven package
+      - name: Install Java and maven
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11'
+          distribution: 'adopt'
+      - name: Publish package
+        run: |
+         mvn \
+         deploy:deploy-file \
+         -DgroupId=cls \
+         -DartifactId=paradiseprizes \
+         -Dversion=${{ steps.semantic_release_info.outputs.version }} \
+         -Dpackaging=zip \
+         -Dfile="${{steps.semantic_release_info.outputs.version}}.zip" \
+         -Durl="https://maven.pkg.github.com/${GITHUB_REPOSITORY}"
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}        
+      - name: Make a changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          #git checkout -b release
+          cd release
+          echo "Test 1 ${GITHUB_ACTOR} ${GITHUB_REF}" >> gitpropertyes.txt
+          echo "${{ github.event.head_commit.message }}" >> gitpropertyes.txt
+          echo "${{ github.ref}}" >> gitpropertyes.txt
+          cat gitpropertyes.txt
+          rm -f random.txt
+          rm -f test.yml
+          ls -a
+          git add .
+          git status
+          #git commit -m "Add changes" -a
+
+      - name: Push changes
+        #uses: ad-m/github-push-action@master
+        uses: actions-js/push@master
         with:
           tag_name: ${{ steps.semantic_release_info.outputs.git_tag }}
           release_name: ${{ steps.semantic_release_info.outputs.git_tag }}
