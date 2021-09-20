@@ -39,7 +39,9 @@ jobs:
       - name: "cat package.json"
         run: cat ./package.json
       - name: "create zip archive"
-        run: zip -r "${{ steps.semantic_release_info.outputs.git_tag }}" release/
+        run: |
+          zip -r "${{ steps.semantic_release_info.outputs.git_tag }}" release/
+          ls -a
         # For deploy build as maven package
       - name: Install Java and maven
         uses: actions/setup-java@v2
