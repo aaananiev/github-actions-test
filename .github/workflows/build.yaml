@@ -48,14 +48,14 @@ jobs:
         # For deploy build as maven package
       - name: Publish package
         run: |
-         mvn -B\
+         mvn \
          deploy:deploy-file \
          -DgroupId=alex \
          -DartifactId=test \
          -Dversion=${{ steps.semantic_release_info.outputs.version }} \
          -Dpackaging=zip \
          -Dfile="${{steps.semantic_release_info.outputs.git_tag}}.zip" \
-         -DrepositoryId=github \
+         -DrepositoryId="github" \
          -Durl="https://maven.pkg.github.com/${GITHUB_REPOSITORY}"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}        
