@@ -34,7 +34,27 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
       - name: "cat package.json"
-        run: cat ./package.json         
+        run: cat ./package.json
+      - name: "create zip archive"
+        run: zip -r "${{ steps.semantic_release_info.outputs.git_tag }}" release/
+        # For deploy build as maven package
+      - name: Install Java and maven
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11'
+          distribution: 'adopt'
+      - name: Publish package
+        run: |
+         mvn \
+         deploy:deploy-file \
+         -DgroupId=cls \
+         -DartifactId=paradiseprizes \
+         -Dversion=${{ steps.semantic_release_info.outputs.version }} \
+         -Dpackaging=zip \
+         -Dfile="${{steps.semantic_release_info.outputs.version}}.zip" \
+         -Durl="https://maven.pkg.github.com/${GITHUB_REPOSITORY}"
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}        
       - name: Make a changes
         run: |
           git config --local user.email "action@github.com"
