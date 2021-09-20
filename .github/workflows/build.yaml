@@ -36,10 +36,6 @@ jobs:
           file: package.json
           field: version
           value: ${{ steps.semantic_release_info.outputs.git_tag }}
-      - name: Create GitHub Release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN }}
       - name: "cat package.json"
         run: cat ./package.json
       - name: "create zip archive"
