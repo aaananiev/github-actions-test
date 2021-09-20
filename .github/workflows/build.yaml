@@ -13,10 +13,10 @@ jobs:
       packages: write
     steps:
       - uses: actions/checkout@v2
+      - uses: actions/setup-java@v2
         with:
-          ref: ${{ github.ref }}
-          token: ${{ secrets.TOKEN}}
-          fetch-depth: 0
+          java-version: '11'
+          distribution: 'adopt'
       - name: Gets semantic release info
         id: semantic_release_info
         uses: jossef/action-semantic-release-info@v1
@@ -46,14 +46,10 @@ jobs:
           zip -r "${{ steps.semantic_release_info.outputs.git_tag }}.zip" release/
           ls -a
         # For deploy build as maven package
-      - name: Install Java and maven
-        uses: actions/setup-java@v2
-        with:
-          java-version: '11'
-          distribution: 'adopt'
       - name: Publish package
         run: |
          mvn \
+         --batch-mode \
          deploy:deploy-file \
          -DgroupId=alex \
          -DartifactId=test \
