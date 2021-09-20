@@ -21,7 +21,7 @@ jobs:
         id: semantic_release_info
         uses: jossef/action-semantic-release-info@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: "Show semantic release data"
         run: |
           echo "Tag: ${{ steps.semantic_release_info.outputs.git_tag }}"
@@ -58,7 +58,7 @@ jobs:
          -Dfile="${{steps.semantic_release_info.outputs.git_tag}}.zip" \
          -Durl="https://maven.pkg.github.com/${GITHUB_REPOSITORY}"
         env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN }}        
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}        
       - name: Make a changes
         run: |
           git config --local user.email "action@github.com"
