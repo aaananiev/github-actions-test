@@ -54,7 +54,7 @@ jobs:
          -DartifactId=paradiseprizes \
          -Dversion=${{ steps.semantic_release_info.outputs.version }} \
          -Dpackaging=zip \
-         -Dfile="${{steps.semantic_release_info.outputs.version}}.zip" \
+         -Dfile="${{steps.semantic_release_info.outputs.git_tag}}.zip" \
          -Durl="https://maven.pkg.github.com/${GITHUB_REPOSITORY}"
         env:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}        
