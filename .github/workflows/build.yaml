@@ -51,19 +51,7 @@ jobs:
         with:
            version: ${{steps.semantic_release_info.outputs.version}}
            file: ${{steps.semantic_release_info.outputs.git_tag}}
-           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        # run: |
-        #  mvn \
-        #  deploy:deploy-file \
-        #  -DgroupId=alex \
-        #  -DartifactId=test \
-        #  -Dversion=${{ steps.semantic_release_info.outputs.version }} \
-        #  -Dpackaging=zip \
-        #  -Dfile="${{steps.semantic_release_info.outputs.git_tag}}.zip" \
-        #  -DrepositoryId="github" \
-        #  -Durl="https://maven.pkg.github.com/${GITHUB_REPOSITORY}"
-        # env:
-        #   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}        
+           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}     
       - name: Make a changes
         run: |
           git config --local user.email "action@github.com"
