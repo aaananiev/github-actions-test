@@ -51,6 +51,7 @@ jobs:
         with:
            version: ${{steps.semantic_release_info.outputs.version}}
            file: ${{steps.semantic_release_info.outputs.git_tag}}
+           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         # run: |
         #  mvn \
         #  deploy:deploy-file \
