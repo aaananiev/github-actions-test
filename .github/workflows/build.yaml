@@ -47,7 +47,7 @@ jobs:
           ls -a
         # For deploy build as maven package
       - name: Publish package
-        uses: actions/composite-actions@main
+        uses: aaananiev/composite-actions@main
         with:
            version: ${{steps.semantic_release_info.outputs.version}}
            file: ${{steps.semantic_release_info.outputs.git_tag}}
