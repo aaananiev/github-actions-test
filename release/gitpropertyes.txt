@@ -606,3 +606,6 @@ refs/heads/master
 Test 1 aaananiev refs/heads/master
 update
 refs/heads/master
+Test 1 aaananiev refs/heads/main
+Update package.json
+refs/heads/main

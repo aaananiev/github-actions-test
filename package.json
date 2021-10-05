@@ -1,9 +1,12 @@
 {
   "name": "paradiseprizes",
   "gameFolder": "paradiseprizes",
-  "version": "v1.2.1",
+  "version": "v1.2.2",
   "description": "paradiseprizes",
   "release": {
-  "branches": ["main", "next"]
+    "branches": [
+      "main",
+      "next"
+    ]
   }
 }
