@@ -52,11 +52,12 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add -A
-          git commit -m"${{ steps.semantic_release_info.outputs.git_tag }}"
+          #git commit -m"${{ steps.semantic_release_info.outputs.git_tag }}"
           git tag ${{ steps.semantic_release_info.outputs.git_tag }}
-          git push ${{ github.ref }} ${{ steps.semantic_release_info.outputs.git_tag }}
-      #- name: Push changes
-      #  uses: ad-m/github-push-action@v0.6.0
-      #  with:
-      #    github_token: ${{ secrets.GITHUB_TOKEN }}
-      #    tags: true
+          #git push ${{ github.ref }} ${{ steps.semantic_release_info.outputs.git_tag }}
+      - name: Push changes
+        uses: ad-m/github-push-action@v0.6.0
+        with:
+           github_token: ${{ secrets.GITHUB_TOKEN }}
+           branch: ${{ github.ref }}
+           tags: true
