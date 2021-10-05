@@ -42,7 +42,7 @@ jobs:
           value: ${{ steps.semantic_release_info.outputs.version }}
       - name: Update README.md
         run: |
-          (echo "${{ steps.semantic_release_info.outputs.notes }}" && cat README.txt) > temp.md && mv temp.md README.md
+          (echo "${{ steps.semantic_release_info.outputs.notes }}" && cat README.md) > temp.md && mv temp.md README.md
           rm -f temp.md
           cat README.md
       - name: Reconfigure git to use HTTP autentication     
