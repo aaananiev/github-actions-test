@@ -42,7 +42,7 @@ jobs:
           value: ${{ steps.semantic_release_info.outputs.version }}
       - name: Update README.md
         run: |
-          (echo "${{ steps.semantic_release_info.outputs.notes }}" && cat random.txt) > temp.md && mv temp.md random.txt
+          (echo "${{ steps.semantic_release_info.outputs.notes }}" && cat README.txt) > temp.md && mv temp.md README.txt
           rm -f temp.md
       - name: Reconfigure git to use HTTP autentication     
         run: |
@@ -52,7 +52,7 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add -A
-          #git commit -m"${{ steps.semantic_release_info.outputs.git_tag }}"
+          git commit -m"${{ steps.semantic_release_info.outputs.git_tag }}"
           git tag ${{ steps.semantic_release_info.outputs.git_tag }}
           #git push ${{ github.ref }} ${{ steps.semantic_release_info.outputs.git_tag }}
       - name: Push changes
