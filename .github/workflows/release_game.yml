@@ -52,7 +52,7 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add -A
-          git commit
+          git commit -m"${{ steps.semantic_release_info.outputs.git_tag }}"
           git tag ${{ steps.semantic_release_info.outputs.git_tag }}
           git push ${{ steps.semantic_release_info.outputs.git_tag }}
       #- name: Push changes
