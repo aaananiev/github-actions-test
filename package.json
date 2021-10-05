@@ -3,4 +3,7 @@
   "gameFolder": "paradiseprizes",
   "version": "v1.2.1",
   "description": "paradiseprizes"
+  "release": {
+    defaultBranch: "main"
+  }
 }
