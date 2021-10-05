@@ -2,7 +2,7 @@
   "name": "paradiseprizes",
   "gameFolder": "paradiseprizes",
   "version": "v1.2.1",
-  "description": "paradiseprizes"
+  "description": "paradiseprizes",
   "release": {
     defaultBranch: "main"
   }
