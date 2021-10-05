@@ -8,12 +8,15 @@ on:
 jobs:
   build-release:
     runs-on: ubuntu-latest
+    permissions: 
+      contents: write
+      packages: write
     steps:
       - uses: actions/checkout@v2
+      - uses: actions/setup-java@v2
         with:
-          ref: ${{ github.ref }}
-          token: ${{ secrets.TOKEN}}
-          fetch-depth: 0
+          java-version: '11'
+          distribution: 'adopt'
       - name: Gets semantic release info
         id: semantic_release_info
         uses: jossef/action-semantic-release-info@v1
@@ -36,16 +39,46 @@ jobs:
           file: package.json
           field: version
           value: ${{ steps.semantic_release_info.outputs.git_tag }}
-      - name: Create GitHub Release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN }}
+      - name: "cat package.json"
+        run: cat ./package.json
+      - name: "create zip archive"
+        run: |
+          zip -r "${{ steps.semantic_release_info.outputs.git_tag }}.zip" release/
+          ls -a
+        # For deploy build as maven package
+      - name: Publish package
+        uses: aaananiev/composite-actions@main
+        with:
+           version: ${{steps.semantic_release_info.outputs.version}}
+           file: ${{steps.semantic_release_info.outputs.git_tag}}
+           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}     
+      - name: Make a changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          #git checkout -b release
+          cd release
+          echo "Test 1 ${GITHUB_ACTOR} ${GITHUB_REF}" >> gitpropertyes.txt
+          echo "${{ github.event.head_commit.message }}" >> gitpropertyes.txt
+          echo "${{ github.ref}}" >> gitpropertyes.txt
+          cat gitpropertyes.txt
+          rm -f random.txt
+          rm -f test.yml
+          ls -a
+          git add .
+          git status
+          #git commit -m "Add changes" -a
+
+      - name: Push changes
+        #uses: ad-m/github-push-action@master
+        uses: actions-js/push@master
         with:
           tag_name: ${{ steps.semantic_release_info.outputs.git_tag }}
           release_name: ${{ steps.semantic_release_info.outputs.git_tag }}
           body: ${{ steps.semantic_release_info.outputs.notes }}
           draft: false
-          prerelease: false         
+          prerelease: false
+          github_token: ${{ secrets.GITHUB_TOKEN }}         
       # - name: NodeJS setup
       #   uses: actions/setup-node@v1
       #   with:
