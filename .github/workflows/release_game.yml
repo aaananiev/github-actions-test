@@ -1,0 +1,60 @@
+name: Game Releasе
+
+on:
+ push:
+    branches: [ main]
+env:
+  TOKEN: ${{ secrets.IWG_MACHINEUSER_GITHUB_USER }}
+
+jobs:        
+  game-release:
+    runs-on: ubuntu-latest
+    permissions: 
+      contents: write
+      packages: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          persist-credentials: false
+      - name: Gets semantic release info
+        id: semantic_release_info
+        uses: jossef/action-semantic-release-info@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: "Show semantic release data"
+        run: |
+          echo "Tag: ${{ steps.semantic_release_info.outputs.git_tag }}"
+          echo "Channel: ${{ steps.semantic_release_info.outputs.channel }}"
+          echo "Type: ${{ steps.semantic_release_info.outputs.type }}"
+          echo "Head: ${{ steps.semantic_release_info.outputs.git_head }}"
+          echo "Version: ${{ steps.semantic_release_info.outputs.version }}"
+          echo "Name: ${{ steps.semantic_release_info.outputs.name }}"
+          echo "Notes: ${{ steps.semantic_release_info.outputs.notes }}"                  
+      - name: "cat package.json"
+        run: cat ./package.json
+      - name: Update package.json version
+        uses: jossef/action-set-json-field@v1
+        with:
+          file: package.json
+          field: version
+          value: ${{ steps.semantic_release_info.outputs.version }}
+      - name: Update README.md
+        run: |
+          (echo "${{ steps.semantic_release_info.outputs.notes }}" && cat random.txt) > temp.md && mv temp.md random.txt
+          rm -f temp.md
+      - name: Reconfigure git to use HTTP autentication     
+        run: |
+          git config --global url."https://${TOKEN}@github.com/".insteadOf ssh://git@github.com/   
+      - name: Create Tag
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add -A
+          git tag ${{ steps.semantic_release_info.outputs.git_tag }}
+      - name: Push changes
+        uses: ad-m/github-push-action@v0.6.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          tags: true
