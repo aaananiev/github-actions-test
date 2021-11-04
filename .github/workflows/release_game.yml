@@ -2,9 +2,9 @@ name: Game Releasе
 
 on:
  push:
-    branches: [ main]
+    branches: [ main ]
 env:
-  TOKEN: ${{ secrets.IWG_MACHINEUSER_GITHUB_USER }}
+  TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 jobs:        
   game-release:
@@ -42,8 +42,9 @@ jobs:
           value: ${{ steps.semantic_release_info.outputs.version }}
       - name: Update README.md
         run: |
-          (echo "${{ steps.semantic_release_info.outputs.notes }}" && cat random.txt) > temp.md && mv temp.md random.txt
+          (echo "${{ steps.semantic_release_info.outputs.notes }}" && cat README.md) > temp.md && mv temp.md README.md
           rm -f temp.md
+          cat README.md
       - name: Reconfigure git to use HTTP autentication     
         run: |
           git config --global url."https://${TOKEN}@github.com/".insteadOf ssh://git@github.com/   
@@ -51,10 +52,13 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add -A
+          #git add -A
+          #git commit -m"${{ steps.semantic_release_info.outputs.git_tag }}"
           git tag ${{ steps.semantic_release_info.outputs.git_tag }}
+          #git push --tags
       - name: Push changes
         uses: ad-m/github-push-action@v0.6.0
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          tags: true
+           github_token: ${{ secrets.GITHUB_TOKEN }}
+           branch: ${{ github.ref }}
+           tags: true
