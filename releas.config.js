@@ -1,3 +1,0 @@
-moddule.exports = {
-  branches: "main"
-};
