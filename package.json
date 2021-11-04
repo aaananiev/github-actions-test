@@ -5,7 +5,6 @@
   "description": "paradiseprizes",
   "release": {
     "branches": [
-      "main",
       "next"
     ]
   }
