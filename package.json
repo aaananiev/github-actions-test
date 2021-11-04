@@ -2,5 +2,8 @@
   "name": "paradiseprizes",
   "gameFolder": "paradiseprizes",
   "version": "v1.2.2",
-  "description": "paradiseprizes"
+  "description": "paradiseprizes",
+  "config":{
+    "gameVersion" : "v1.2.2"
+  }
 }

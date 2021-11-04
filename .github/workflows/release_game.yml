@@ -40,6 +40,14 @@ jobs:
           file: package.json
           field: version
           value: ${{ steps.semantic_release_info.outputs.version }}
+      - name: Update package.json gameVersion
+        uses: jossef/action-set-json-field@v1
+        with:
+          file: package.json
+          field: config.gameVersion
+          value: ${{ steps.semantic_release_info.outputs.version }}
+      - name: "cat package.json"
+        run: cat ./package.json      
       - name: Update README.md
         run: |
           (echo "${{ steps.semantic_release_info.outputs.notes }}" && cat README.md) > temp.md && mv temp.md README.md
